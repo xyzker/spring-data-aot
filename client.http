@@ -1,0 +1,137 @@
+### Spring Data AOT Coffee Shop - API Tests
+### Use IntelliJ's HTTP Client to run these requests
+
+## ===========================================
+## COFFEE API - Demonstrates AOT Query Methods
+## ===========================================
+
+### Get all coffees
+### Basic CRUD operation - uses inherited findAll() method
+GET http://localhost:8080/api/coffees
+
+###
+
+### Search coffees by name pattern
+### AOT Feature: Complex derived query with LIKE + case-insensitive
+### Method: findByNameContainingIgnoreCase(String name)
+### Generated SQL: SELECT * FROM coffee WHERE UPPER(name) LIKE UPPER('%latte%')
+GET http://localhost:8080/api/coffees/search?pattern=latte
+
+###
+
+### Filter coffees by size and minimum price
+### AOT Feature: Multi-property query with AND conditions
+### Method: findBySizeAndPriceGreaterThan(Size size, BigDecimal price)
+### Generated SQL: SELECT * FROM coffee WHERE size = ? AND price > ?
+GET http://localhost:8080/api/coffees/filter?size=MEDIUM&minPrice=5.00
+
+###
+
+### Find affordable coffees by size
+### AOT Feature: Custom @Query with compile-time SQL validation
+### Method: findAffordableCoffeesBySize(String size, BigDecimal maxPrice)
+### Uses hand-written SQL that AOT validates during build
+GET http://localhost:8080/api/coffees/affordable?size=LARGE&maxPrice=6.00
+
+###
+
+## ===========================================
+## ORDER API - Demonstrates More AOT Features
+## ===========================================
+
+### Get all orders
+### Basic CRUD operation
+GET http://localhost:8080/api/orders
+
+###
+
+### Find orders by customer name
+### AOT Feature: Simple derived query
+### Method: findByCustomerName(String customerName)
+### Generated SQL: SELECT * FROM orders WHERE customer_name = ?
+GET http://localhost:8080/api/orders/customer/Alice%20Johnson
+
+###
+
+### Find recent orders by status
+### AOT Feature: Temporal query with date comparison
+### Method: findByStatusAndOrderDateAfter(OrderStatus status, LocalDateTime date)
+### Generated SQL: SELECT * FROM orders WHERE status = ? AND order_date > ?
+GET http://localhost:8080/api/orders/recent?status=PENDING&since=2024-01-01T00:00:00
+
+###
+
+### Find orders containing a specific coffee
+### AOT Feature: Complex JOIN across 3 tables - validated at build time
+### Method: findOrdersByCoffeeName(String coffeeName)
+### Uses custom @Query with INNER JOINs between orders, order_items, and coffee tables
+GET http://localhost:8080/api/orders/by-coffee?coffeeName=Cappuccino
+
+###
+
+## ===========================================
+## ORDER ITEMS API
+## ===========================================
+
+### Get order items for a specific order
+### AOT Feature: Foreign key relationship query
+### Method: findByOrderId(Long orderId)
+### Generated SQL: SELECT * FROM order_items WHERE order_id = ?
+GET http://localhost:8080/api/orders/1/items
+
+###
+
+## ===========================================
+## TEST DIFFERENT COFFEE SIZES
+## ===========================================
+
+### Small coffees under $4
+GET http://localhost:8080/api/coffees/affordable?size=SMALL&maxPrice=4.00
+
+###
+
+### Medium coffees under $5
+GET http://localhost:8080/api/coffees/affordable?size=MEDIUM&maxPrice=5.00
+
+###
+
+### Large coffees under $7
+GET http://localhost:8080/api/coffees/affordable?size=LARGE&maxPrice=7.00
+
+###
+
+## ===========================================
+## TEST DIFFERENT SEARCH PATTERNS
+## ===========================================
+
+### Search for espresso-based drinks
+GET http://localhost:8080/api/coffees/search?pattern=espresso
+
+###
+
+### Search for cold drinks
+GET http://localhost:8080/api/coffees/search?pattern=cold
+
+###
+
+### Search for mocha drinks
+GET http://localhost:8080/api/coffees/search?pattern=mocha
+
+###
+
+## ===========================================
+## TEST DIFFERENT ORDER STATUSES
+## ===========================================
+
+### Find completed orders
+GET http://localhost:8080/api/orders/recent?status=COMPLETED&since=2024-01-01T00:00:00
+
+###
+
+### Find cancelled orders
+GET http://localhost:8080/api/orders/recent?status=CANCELLED&since=2024-01-01T00:00:00
+
+###
+
+### Find orders in progress
+GET http://localhost:8080/api/orders/recent?status=IN_PROGRESS&since=2024-01-01T00:00:00
