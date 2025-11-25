@@ -1,12 +1,12 @@
 package dev.danvega.coffee;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import dev.danvega.coffee.coffee.CoffeeRepository;
 import dev.danvega.coffee.order.OrderItemRepository;
 import dev.danvega.coffee.order.OrderRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.repository.CrudRepository;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

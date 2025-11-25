@@ -4,7 +4,7 @@ spring:
 
   # Database configuration - using H2 in-memory for simplicity
   datasource:
-    url: jdbc:h2:mem:coffee;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    url: jdbc:h2:mem:coffee;DATABASE_TO_UPPER=false;CASE_INSENSITIVE_IDENTIFIERS=TRUE
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -13,14 +13,6 @@ spring:
   sql:
     init:
       mode: always
-      schema-locations: classpath:schema.sql
-      data-locations: classpath:data.sql
-
-  # H2 Console (optional - useful for debugging:: not needed with devtools)
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
 
 # Logging for AOT repository generation (useful to see what's being generated)
 logging:

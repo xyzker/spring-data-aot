@@ -5,9 +5,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 
-/**
- * Coffee entity representing a coffee product in the shop
- */
 @Table("coffee")
 public record Coffee(
         @Id Long id,
@@ -28,9 +25,6 @@ public record Coffee(
         }
     }
 
-    /**
-     * Constructor for creating new coffee without ID
-     */
     public Coffee(String name, String description, BigDecimal price, Size size) {
         this(null, name, description, price, size);
     }

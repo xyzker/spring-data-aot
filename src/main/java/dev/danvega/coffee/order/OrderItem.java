@@ -5,9 +5,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 
-/**
- * OrderItem entity representing a line item in an order
- */
 @Table("order_items")
 public record OrderItem(
         @Id Long id,
@@ -31,9 +28,6 @@ public record OrderItem(
         }
     }
 
-    /**
-     * Constructor for creating new order item without ID
-     */
     public OrderItem(Long orderId, Long coffeeId, Integer quantity, BigDecimal price) {
         this(null, orderId, coffeeId, quantity, price);
     }

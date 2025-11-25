@@ -6,9 +6,6 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * Order entity representing a customer order
- */
 @Table("orders")
 public record Order(
         @Id Long id,
@@ -33,9 +30,6 @@ public record Order(
         }
     }
 
-    /**
-     * Constructor for creating new order without ID
-     */
     public Order(Long customerId, String customerName, LocalDateTime orderDate,
                  BigDecimal totalAmount, OrderStatus status) {
         this(null, customerId, customerName, orderDate, totalAmount, status);
