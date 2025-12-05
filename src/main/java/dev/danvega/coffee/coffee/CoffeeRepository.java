@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface CoffeeRepository extends ListCrudRepository<Coffee, Long> {
 
-    List<Coffee> findByNaame(String name);
+    // List<Coffee> findByNaame(String name);
 
     /**
      * DEMONSTRATES: Complex derived query method with multiple keywords.
