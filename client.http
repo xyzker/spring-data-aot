@@ -5,33 +5,33 @@
 ## COFFEE API - Demonstrates AOT Query Methods
 ## ===========================================
 
-### Get all coffees
+### Get all coffee
 ### Basic CRUD operation - uses inherited findAll() method
-GET http://localhost:8080/api/coffees
+GET http://localhost:8080/api/coffee
 
 ###
 
-### Search coffees by name pattern
+### Search coffee by name pattern
 ### AOT Feature: Complex derived query with LIKE + case-insensitive
 ### Method: findByNameContainingIgnoreCase(String name)
 ### Generated SQL: SELECT * FROM coffee WHERE UPPER(name) LIKE UPPER('%latte%')
-GET http://localhost:8080/api/coffees/search?pattern=latte
+GET http://localhost:8080/api/coffee/search?pattern=latte
 
 ###
 
-### Filter coffees by size and minimum price
+### Filter coffee by size and minimum price
 ### AOT Feature: Multi-property query with AND conditions
 ### Method: findBySizeAndPriceGreaterThan(Size size, BigDecimal price)
 ### Generated SQL: SELECT * FROM coffee WHERE size = ? AND price > ?
-GET http://localhost:8080/api/coffees/filter?size=MEDIUM&minPrice=5.00
+GET http://localhost:8080/api/coffee/filter?size=MEDIUM&minPrice=5.00
 
 ###
 
-### Find affordable coffees by size
+### Find affordable coffee by size
 ### AOT Feature: Custom @Query with compile-time SQL validation
-### Method: findAffordableCoffeesBySize(String size, BigDecimal maxPrice)
+### Method: findAffordablecoffeeBySize(String size, BigDecimal maxPrice)
 ### Uses hand-written SQL that AOT validates during build
-GET http://localhost:8080/api/coffees/affordable?size=LARGE&maxPrice=6.00
+GET http://localhost:8080/api/coffee/affordable?size=LARGE&maxPrice=6.00
 
 ###
 
@@ -85,18 +85,18 @@ GET http://localhost:8080/api/orders/1/items
 ## TEST DIFFERENT COFFEE SIZES
 ## ===========================================
 
-### Small coffees under $4
-GET http://localhost:8080/api/coffees/affordable?size=SMALL&maxPrice=4.00
+### Small coffee under $4
+GET http://localhost:8080/api/coffee/affordable?size=SMALL&maxPrice=4.00
 
 ###
 
-### Medium coffees under $5
-GET http://localhost:8080/api/coffees/affordable?size=MEDIUM&maxPrice=5.00
+### Medium coffee under $5
+GET http://localhost:8080/api/coffee/affordable?size=MEDIUM&maxPrice=5.00
 
 ###
 
-### Large coffees under $7
-GET http://localhost:8080/api/coffees/affordable?size=LARGE&maxPrice=7.00
+### Large coffee under $7
+GET http://localhost:8080/api/coffee/affordable?size=LARGE&maxPrice=7.00
 
 ###
 
@@ -105,17 +105,17 @@ GET http://localhost:8080/api/coffees/affordable?size=LARGE&maxPrice=7.00
 ## ===========================================
 
 ### Search for espresso-based drinks
-GET http://localhost:8080/api/coffees/search?pattern=espresso
+GET http://localhost:8080/api/coffee/search?pattern=espresso
 
 ###
 
 ### Search for cold drinks
-GET http://localhost:8080/api/coffees/search?pattern=cold
+GET http://localhost:8080/api/coffee/search?pattern=cold
 
 ###
 
 ### Search for mocha drinks
-GET http://localhost:8080/api/coffees/search?pattern=mocha
+GET http://localhost:8080/api/coffee/search?pattern=mocha
 
 ###
 
