@@ -1,5 +1,6 @@
 package dev.danvega.coffee.order;
 
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +12,7 @@ import java.util.List;
  * OrderItemRepository demonstrating Spring Data AOT for relationship queries.
  */
 @Repository
-public interface OrderItemRepository extends ListCrudRepository<OrderItem, Long> {
+public interface OrderItemRepository extends ListCrudRepository<@NonNull OrderItem, @NonNull Long> {
 
     /**
      * DEMONSTRATES: Foreign key relationship query.
